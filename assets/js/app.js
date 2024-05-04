@@ -137,14 +137,15 @@
             accepts: 'application/json',
             data: data,
             success: function (data) {
-              $(".contact-form").trigger("reset");
+              $("#contactForm").trigger("reset");
               _self.find('button[type="submit"]').removeAttr("disabled");
               if (data.success) {
+                // Modifica el mensaje de éxito aquí
                 document.getElementById("message").innerHTML =
-                  "<h3 class='alert-msg bg-success text-white p-3 mt-3'>Email Sent Successfully</h3>";
+                  "<h3 class='alert-msg bg-success color-primary p-5 mt-5'>¡Gracias! <br> Me pondre en contacto lo antes posible</h3>";
               } else {
                 document.getElementById("message").innerHTML =
-                  "<h3 class='bg-danger text-white p-3 mt-3'>There is an error</h3>";
+                  "<h3 class='bg-danger text-black p-5 mt-5'>Hubo un error, intente denuevo</h3>";
               }
               $("#message").show("slow");
               $("#message").slideDown("slow");
@@ -153,6 +154,8 @@
                 $("#message").hide("slow");
               }, 3000);
             },
+            
+            
             error: function(response){
               alert("Error submitting the form.");
               window.location.reload();
