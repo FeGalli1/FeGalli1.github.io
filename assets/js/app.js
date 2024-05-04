@@ -141,11 +141,11 @@
               _self.find('button[type="submit"]').removeAttr("disabled");
               if (data.success) {
                 // Modifica el mensaje de éxito aquí
-                document.getElementById("message").innerHTML =
-                  "<h3 class='alert-msg bg-success color-primary p-5 mt-5'>¡Gracias! <br> Me pondre en contacto lo antes posible</h3>";
+                document.getElementById("message").innerHTML =       
+                "<h5 class='alert-msg bg-success color-primary p-5 mt-5'>¡Gracias! <br> Me pondré en contacto lo antes posible</h5>";
               } else {
                 document.getElementById("message").innerHTML =
-                  "<h3 class='bg-danger text-black p-5 mt-5'>Hubo un error, intente denuevo</h3>";
+                  "<h5 class='bg-danger text-black p-5 mt-5'>Hubo un error, intente denuevo</h5>";
               }
               $("#message").show("slow");
               $("#message").slideDown("slow");
