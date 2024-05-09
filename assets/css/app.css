@@ -1413,22 +1413,30 @@ footer .content .social-icons {
     margin-top: 80px;
   }
 }
+.hero-banner .center-block{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .hero-banner .content-block {
-  height: 527px;
+  /* height: 527px; */
+  /* width: 50%; */
   padding: 48px 32px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 }
 @media (max-width: 992px) {
   .hero-banner .content-block {
     height: auto;
-    margin-bottom: 24px;
+    margin-top: 3rem;
   }
 }
 @media (max-width: 492px) {
   .hero-banner .content-block {
     padding: 32px 24px;
+    margin-top: 3rem;
   }
 }
 .hero-banner .content-block .text-block {
