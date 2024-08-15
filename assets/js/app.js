@@ -1,17 +1,17 @@
 (function (window, document, $, undefined) {
   "use strict";
   var Init = {
-    i: function (e) {
+    i: function () {
       Init.s();
       Init.methods();
     },
-    s: function (e) {
-      (this._window = $(window)),
-        (this._document = $(document)),
-        (this._body = $("body")),
-        (this._html = $("html"));
+    s: function () {
+      this._window = $(window);
+      this._document = $(document);
+      this._body = $("body");
+      this._html = $("html");
     },
-    methods: function (e) {
+    methods: function () {
       Init.w();
       Init.BackToTop();
       Init.preloader();
@@ -20,7 +20,7 @@
       Init.formValidation();
       Init.contactForm();
     },
-    w: function (e) {
+    w: function () {
       this._window.on("load", Init.l).on("scroll", Init.res);
     },
     BackToTop: function () {
@@ -34,19 +34,13 @@
       });
       btn.on("click", function (e) {
         e.preventDefault();
-        $("html, body").animate(
-          {
-            scrollTop: 0,
-          },
-          "300"
-        );
+        $("html, body").animate({ scrollTop: 0 }, "300");
       });
     },
     preloader: function () {
-      setTimeout(function () { $('#preloader').hide('slow') }, 2000);
+      setTimeout(function () { $('#preloader').hide('slow'); }, 2000);
     },
-    
-    initializeSlick: function (e) {
+    initializeSlick: function () {
       if ($(".client-slider").length) {
         $(".client-slider").slick({
           infinite: true,
@@ -57,30 +51,10 @@
           cssEase: 'linear',
           autoplaySpeed: 3000,
           responsive: [
-            {
-              breakpoint: 1199,
-              settings: {
-                slidesToShow: 5,
-              },
-            },
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: 4,
-              },
-            },
-            {
-              breakpoint: 767,
-              settings: {
-                slidesToShow: 3,
-              },
-            },
-            {
-              breakpoint: 575,
-              settings: {
-                slidesToShow: 2,
-              },
-            },
+            { breakpoint: 1199, settings: { slidesToShow: 5 } },
+            { breakpoint: 992, settings: { slidesToShow: 4 } },
+            { breakpoint: 767, settings: { slidesToShow: 3 } },
+            { breakpoint: 575, settings: { slidesToShow: 2 } },
           ],
         });
       }
@@ -92,17 +66,10 @@
           $('.mobile-navar').toggleClass('active');
           return false;
         });
-    
         $('.has-children').on('click', function(e) {
           e.stopPropagation(); 
-          
           $(this).children('ul').slideToggle('slow', 'swing');
           $('.icon-arrow', this).toggleClass('open');
-    
-          if ($('.mobile-navar.active').length) {
-            $('.bar').removeClass('animate');
-            $('.mobile-navar').removeClass('active');
-          }
         });
         $('.menu-item').on('click', function() {
           if ($('.mobile-navar.active').length) {
@@ -122,11 +89,7 @@
         e.preventDefault();
         if ($("#contactForm").valid()) {
           var _self = $(this);
-          _self
-            .closest("div")
-            .find('button[type="submit"]')
-            .attr("disabled", "disabled");
-
+          _self.closest("div").find('button[type="submit"]').attr("disabled", "disabled");
 
           let data = $(this).serialize();
           let url = "https://formsubmit.co/ajax/felipegall1.fg@gmail.com";
@@ -140,36 +103,27 @@
               $("#contactForm").trigger("reset");
               _self.find('button[type="submit"]').removeAttr("disabled");
               if (data.success) {
-                // Modifica el mensaje de éxito aquí
-                document.getElementById("message").innerHTML =       
-                "<h5 class='alert-msg bg-success color-primary p-5 mt-5'>¡Gracias! <br> Me pondré en contacto lo antes posible</h5>";
+                document.getElementById("message").innerHTML =
+                  "<h5 class='alert-msg bg-success color-primary p-5 mt-5'>¡Gracias! <br> Me pondré en contacto lo antes posible</h5>";
               } else {
                 document.getElementById("message").innerHTML =
-                  "<h5 class='bg-danger text-black p-5 mt-5'>Hubo un error, intente denuevo</h5>";
+                  "<h5 class='bg-danger text-black p-5 mt-5'>Hubo un error, intente nuevamente</h5>";
               }
-              $("#message").show("slow");
-              $("#message").slideDown("slow");
+              $("#message").show("slow").slideDown("slow");
               setTimeout(function () {
-                $("#message").slideUp("hide");
-                $("#message").hide("slow");
+                $("#message").slideUp("hide").hide("slow");
               }, 3000);
             },
-            
-            
-            error: function(response){
-              alert("Error submitting the form.");
+            error: function() {
+              alert("Error al enviar el formulario.");
               window.location.reload();
-      
             }
           });
         } else {
           return false;
         }
       });
-    },
-  }
+    }
+  };
   Init.i();
 })(window, document, jQuery);
-
-
-

@@ -1222,7 +1222,7 @@ header.small-screen {
   position: fixed;
   z-index: 990;
   top: 0;
-  height: 62px;
+  height: auto;
   padding: 16px 0 8px;
   background: #F8F8FF;
 }
