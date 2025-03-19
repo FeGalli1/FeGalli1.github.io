@@ -86,44 +86,63 @@
     },
     contactForm: function () {
       $("#contactForm").on("submit", function (e) {
-        e.preventDefault();
-        if ($("#contactForm").valid()) {
-          var _self = $(this);
-          _self.closest("div").find('button[type="submit"]').attr("disabled", "disabled");
-
-          let data = $(this).serialize();
-          let url = "https://formsubmit.co/ajax/felipegall1.fg@gmail.com";
-          $.ajax({
-            method: 'POST',
-            url: url,
-            dataType: 'json',
-            accepts: 'application/json',
-            data: data,
-            success: function (data) {
-              $("#contactForm").trigger("reset");
-              _self.find('button[type="submit"]').removeAttr("disabled");
-              if (data.success) {
-                document.getElementById("message").innerHTML =
-                  "<h5 class='alert-msg bg-success color-primary p-5 mt-5'>¡Gracias! <br> Me pondré en contacto lo antes posible</h5>";
-              } else {
-                document.getElementById("message").innerHTML =
-                  "<h5 class='bg-danger text-black p-5 mt-5'>Hubo un error, intente nuevamente</h5>";
-              }
-              $("#message").show("slow").slideDown("slow");
-              setTimeout(function () {
-                $("#message").slideUp("hide").hide("slow");
-              }, 3000);
-            },
-            error: function() {
-              alert("Error al enviar el formulario.");
-              window.location.reload();
-            }
-          });
-        } else {
-          return false;
-        }
+          e.preventDefault();
+          if ($("#contactForm").valid()) {
+              var _self = $(this);
+              _self.closest("div").find('button[type="submit"]').attr("disabled", "disabled");
+  
+              // Obtener los datos del formulario
+              const name = $("#name").val();
+              const mail = $("#mail").val();
+              const phone = $("#phone").val();
+              const subject = $("#subject").val();
+              const detailMessage = $("#detail-message").val();
+  
+              // Preparar los datos para enviar a la API
+              const data = {
+                  name: "pagina personal", // Nombre fijo
+                  subject: subject, // Asunto del formulario
+                  email: mail, // Correo electrónico del formulario
+                  message: `Mensaje: ${detailMessage}\nTeléfono: ${phone}\nNombre: ${name}\nEmail: ${mail}\nAsunto: ${subject}` // Mensaje con todos los datos
+              };
+  
+              console.log(data);
+  
+              let url = "https://api.nexu.com.ar/send-email"; // Reemplaza con la URL de tu API
+              $.ajax({
+                  method: 'POST',
+                  url: url,
+                  dataType: 'json',
+                  accepts: 'application/json',
+                  contentType: 'application/json',
+                  data: JSON.stringify(data),
+                  success: function (response) {
+                      $("#contactForm").trigger("reset");
+                      _self.find('button[type="submit"]').removeAttr("disabled");
+  
+                      if (response.status === 'success') {
+                          document.getElementById("message").innerHTML =
+                              "<h5 class='alert-msg bg-success color-primary p-5 mt-5'>¡Gracias! <br> Me pondré en contacto lo antes posible</h5>";
+                      } else {
+                          document.getElementById("message").innerHTML =
+                              "<h5 class='bg-danger text-black p-5 mt-5'>Hubo un error, intente nuevamente</h5>";
+                      }
+  
+                      $("#message").show("slow").slideDown("slow");
+                      setTimeout(function () {
+                          $("#message").slideUp("hide").hide("slow");
+                      }, 3000);
+                  },
+                  error: function () {
+                      alert("Error al enviar el formulario.");
+                      window.location.reload();
+                  }
+              });
+          } else {
+              return false;
+          }
       });
-    }
+  }
   };
   Init.i();
 })(window, document, jQuery);

@@ -1236,6 +1236,7 @@ header.small-screen .mobile-menu {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
+  height: 12rem;
 }
 header.small-screen .hamburger-menu {
   display: grid;
@@ -1410,7 +1411,7 @@ footer .content .social-icons {
 
 @media (max-width: 992px) {
   .hero-banner {
-    margin-top: 80px;
+    margin-top: 15rem;
   }
 }
 .hero-banner .center-block{
